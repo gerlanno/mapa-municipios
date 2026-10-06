@@ -1,0 +1,3 @@
+shapely>=2.0
+# só para os testes ponta a ponta:
+playwright

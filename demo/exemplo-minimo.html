@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GigaMap — exemplo mínimo</title>
+<link rel="stylesheet" href="../src/giga-map.css">
+<style>body{margin:0;padding:16px;font-family:system-ui,sans-serif} #mapa{height:80vh}</style>
+</head>
+<body>
+<!-- Precisa de servidor HTTP (a geometria é carregada por fetch):  python3 -m http.server 8080
+     e abrir http://localhost:8080/demo/exemplo-minimo.html -->
+<div id="mapa"></div>
+<script src="../src/giga-map.js"></script>
+<script>
+  // geometria carregada sob demanda: brasil.json + uf/XX.json (só baixa a UF que o usuário abrir)
+  const map = new GigaMap('#mapa', {
+    geoBase: '../data/geo',
+    metric: { label: 'Circuitos', ramp: 'blue', scale: 'quantile', aggregate: 'sum' }
+  });
+
+  // chave = código IBGE do município (7 dígitos). Valor = número, ou objeto com campos extras.
+  map.setData({
+    '2304400': { value: 1200, clientes: 310 },   // Fortaleza
+    '2303709': 340,                               // Caucaia
+    '2312908': 120,                               // Sobral
+    '2307304': 85                                 // Juazeiro do Norte
+  });
+
+  map.on('select', info => console.log('selecionado', info));   // {id, nome, uf, level, value, raw}
+  map.on('navigate', v => console.log('visão', v.level, v.uf));
+
+  // dados reais, por exemplo vindos de uma API/consulta:
+  // fetch('/api/circuitos-por-municipio').then(r => r.json())
+  //   .then(rows => map.setData(Object.fromEntries(rows.map(r => [r.codigo_ibge, r.qtd]))));
+
+  // circuitos individuais (lat/lon) por cima do mapa, na visão de UF:
+  // map.showUF('CE').then(() => map.addPoints([{ lat: -3.7319, lon: -38.5267, label: 'Circuito X' }]));
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa de circuitos por município — demo</title>
+<style>/*__CSS_LIB__*/</style>
+<style>/*__CSS_DEMO__*/</style>
+</head>
+<body>
+<header>
+  <h1>Distribuição de circuitos por município</h1>
+  <span class="badge">DEMO · dados fictícios</span>
+  <span class="sp"></span>
+  <label>Métrica&nbsp;<select id="metric" aria-label="Métrica"></select></label>
+  <input id="q" type="search" list="dl" placeholder="Buscar município…" aria-label="Buscar município" autocomplete="off">
+  <datalist id="dl"></datalist>
+  <label class="chk"><input id="pts" type="checkbox"> circuitos (pontos)</label>
+</header>
+<main>
+  <div class="mapwrap"><div id="crumb"></div><div id="map" style="height:100%"></div></div>
+  <aside id="side" aria-live="polite"></aside>
+</main>
+<script>window.__GEO__ = /*__GEO__*/;</script>
+<script>/*__JS_LIB__*/</script>
+<script>/*__JS_DEMO__*/</script>
+</body>
+</html>
